@@ -1,4 +1,4 @@
 python-dotenv
 python-docx
 openpyxl
-docx2pdf
+rocketpdf

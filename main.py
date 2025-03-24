@@ -3,7 +3,7 @@ import openpyxl
 import platform
 from docx import Document
 from dotenv import load_dotenv
-from docx2pdf import convert
+
 
 load_dotenv()
 workbook = openpyxl.load_workbook(filename=os.getenv('VARIABLES_FILE'))
@@ -20,15 +20,6 @@ def get_variables():
         header_iterator += 1
 
     return variables_dictionary
-
-
-def save_as_pdf(input_docx, output):
-    if platform.system() == 'Linux':
-        #TODO
-        print('Linux support to be done')
-    else:
-        convert(input_docx, output)
-
 
 
 if __name__ == '__main__':
@@ -51,4 +42,9 @@ if __name__ == '__main__':
                             text = inline[i].text.replace(placeholder, row[variables[variable]].value)
                             inline[i].text = text
         doc.save(output_docx)
+        if platform.system() == 'Linux':
+            # TODO
+            print('Linux support to be done')
+        else:
+            os.system(f'rocketpdf parseall {os.getenv('DOCX_OUTPUT_DIRECTORY')}')
 
