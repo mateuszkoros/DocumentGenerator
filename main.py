@@ -23,14 +23,13 @@ def get_variables():
 
 
 if __name__ == '__main__':
-    os.makedirs(os.getenv('DOCX_OUTPUT_DIRECTORY'), exist_ok=True)
+    os.makedirs(os.getenv('OUTPUT_DIRECTORY'), exist_ok=True)
 
     variables = get_variables()
 
     for row in sheet.iter_rows(min_row=2):
         # variables should always include File column
-        output_docx = f'{os.getenv('DOCX_OUTPUT_DIRECTORY')}{row[variables['File']].value}.docx'
-        output_pdf = f'{os.getenv('PDF_OUTPUT_DIRECTORY')}{row[variables['File']].value}.pdf'
+        output_docx = f'{os.getenv('OUTPUT_DIRECTORY')}{row[variables['File']].value}.docx'
         doc = Document(os.getenv('TEMPLATE_FILE'))
         for paragraph in doc.paragraphs:
             for variable in [*variables.keys()]:
@@ -46,5 +45,5 @@ if __name__ == '__main__':
             # TODO
             print('Linux support to be done')
         else:
-            os.system(f'rocketpdf parsedocxs {os.getenv('DOCX_OUTPUT_DIRECTORY')}')
+            os.system(f'rocketpdf parsedocxs {os.getenv('OUTPUT_DIRECTORY')}')
 
