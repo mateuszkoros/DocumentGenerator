@@ -46,5 +46,5 @@ if __name__ == '__main__':
             # TODO
             print('Linux support to be done')
         else:
-            os.system(f'rocketpdf parseall {os.getenv('DOCX_OUTPUT_DIRECTORY')}')
+            os.system(f'rocketpdf parsedocxs {os.getenv('DOCX_OUTPUT_DIRECTORY')}')
 
